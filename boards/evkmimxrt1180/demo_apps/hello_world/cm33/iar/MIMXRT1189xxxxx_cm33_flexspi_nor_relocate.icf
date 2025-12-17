@@ -154,7 +154,11 @@ define block CORE1_IMAGE_BLOCK  with alignment = 16, maximum size = m_core1_imag
 
 //define block RO  with fixed order { readonly section .intvec, readonly, block CORE1_IMAGE_BLOCK };
 
-initialize by copy { readwrite, section .textrw, section DataQuickAccess, readonly};
+initialize by copy { readwrite, section .textrw, section DataQuickAccess, readonly} 
+    except { 
+        section .boot_hdr.conf,
+        section .boot_hdr.xmcd_data,
+        section .boot_hdr.container };
 do not initialize  { section .noinit };
 if (isdefinedsymbol(__use_shmem__)) {
   do not initialize  { section rpmsg_sh_mem_section };

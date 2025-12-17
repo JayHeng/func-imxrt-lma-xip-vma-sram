@@ -40,8 +40,10 @@ void SysTick_DelayTicks(uint32_t n)
 /*!
  * @brief Main function
  */
+#if defined(__ICCARM__)
 extern void * __vector_RAM_table [];
 #pragma required=__vector_RAM_table
+#endif
 int main(void)
 {
     /* Init board hardware. */
