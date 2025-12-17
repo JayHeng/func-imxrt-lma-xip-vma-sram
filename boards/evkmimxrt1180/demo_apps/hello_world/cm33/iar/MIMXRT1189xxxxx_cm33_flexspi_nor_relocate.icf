@@ -147,7 +147,6 @@ if (isdefinedsymbol(__use_shmem__)) {
 define block RW            { readwrite };
 define block ZI            { zi };
 define block NCACHE_VAR    { section NonCacheable , section NonCacheable.init };
-define block QACCESS_CODE  { section CodeQuickAccess };
 define block QACCESS_DATA  { section DataQuickAccess };
 define block CSTACK    with alignment = 8, size = __size_cstack__   { };
 define block HEAP      with alignment = 8, size = __size_heap__     { };
@@ -155,7 +154,7 @@ define block CORE1_IMAGE_BLOCK  with alignment = 16, maximum size = m_core1_imag
 
 define block RO  with fixed order { readonly section .intvec, readonly, block CORE1_IMAGE_BLOCK };
 
-initialize by copy { readwrite, section .textrw, section DataQuickAccess, section CodeQuickAccess };
+initialize by copy { readwrite, section .textrw, section DataQuickAccess};
 do not initialize  { section .noinit };
 if (isdefinedsymbol(__use_shmem__)) {
   do not initialize  { section rpmsg_sh_mem_section };
@@ -167,7 +166,6 @@ place in FCB_region                         { section .boot_hdr.conf };
 place in XMCD_region                        { section .boot_hdr.xmcd_data };
 place in CONTAINER_region                   { section .boot_hdr.container };
 place in TEXT_region                        { first block RO };
-place in QACODE_region                      { block QACCESS_CODE };
 place in DATA_region                        { block RW };
 place in DATA_region                        { block ZI };
 place in DATA_region                        { block QACCESS_DATA };
