@@ -19,20 +19,29 @@
  * Prototypes
  ******************************************************************************/
 
+extern volatile uint32_t g_systickCounter;
+
 /*******************************************************************************
  * Variables
  ******************************************************************************/
 
+
 /*******************************************************************************
  * Code
  ******************************************************************************/
+
+void SysTick_DelayTicks(uint32_t n)
+{
+    uint32_t systickCounter = g_systickCounter + n;
+    while (g_systickCounter < systickCounter)
+    {
+    }
+}
 /*!
  * @brief Main function
  */
 int main(void)
 {
-    char ch;
-
     /* Init board hardware. */
     BOARD_InitHardware();
 
@@ -40,7 +49,8 @@ int main(void)
 
     while (1)
     {
-        ch = GETCHAR();
-        PUTCHAR(ch);
+        /* Delay 1000 ms */
+        SysTick_DelayTicks(1000U);
+        RGPIO_TogglePinsOutput(EXAMPLE_LED_GPIO, 1UL << EXAMPLE_LED_GPIO_PIN);
     }
 }
