@@ -14212,7 +14212,7 @@
             <name>$PROJ_DIR$\..\..\..\..\..\..\devices\MIMXRT1189\MIMXRT1189_cm33_features.h</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\..\..\..\..\..\devices\MIMXRT1189\system_MIMXRT1189_cm33.c</name>
+            <name>$PROJ_DIR$\..\system_MIMXRT1189_cm33.c</name>
         </file>
         <file>
             <name>$PROJ_DIR$\..\..\..\..\..\..\devices\MIMXRT1189\system_MIMXRT1189_cm33.h</name>
