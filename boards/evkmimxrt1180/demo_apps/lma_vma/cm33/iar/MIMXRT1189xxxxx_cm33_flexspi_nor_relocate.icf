@@ -150,9 +150,9 @@ define block NCACHE_VAR    { section NonCacheable , section NonCacheable.init };
 define block QACCESS_DATA  { section DataQuickAccess };
 define block CSTACK    with alignment = 8, size = __size_cstack__   { };
 define block HEAP      with alignment = 8, size = __size_heap__     { };
-define block CORE1_IMAGE_BLOCK  with alignment = 16, maximum size = m_core1_image_maximum_size  { section  __core1_image };
+//define block CORE1_IMAGE_BLOCK  with alignment = 16, maximum size = m_core1_image_maximum_size  { section  __core1_image };
 
-//define block RO  with fixed order { readonly section .intvec, readonly, block CORE1_IMAGE_BLOCK };
+define block RO  { readonly };
 
 initialize by copy { readwrite, section .textrw, section DataQuickAccess, readonly} 
     except { 
@@ -169,10 +169,9 @@ keep{ section .boot_hdr.conf, section .boot_hdr.xmcd_data, section .boot_hdr.con
 place in FCB_region                         { section .boot_hdr.conf };
 place in XMCD_region                        { section .boot_hdr.xmcd_data };
 place in CONTAINER_region                   { section .boot_hdr.container };
-//place in TEXT_region                        { first block RO };
 place at address mem:m_ram_vector_table_start { section .intvec_RAM };
 place at address mem:m_text_start             { readonly section .intvec };
-place in TEXT_region                          { readonly, block CORE1_IMAGE_BLOCK };
+place in TEXT_region                          { first block RO };
 
 place in DATA_region                        { block RW };
 place in DATA_region                        { block ZI };
